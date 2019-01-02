@@ -1,4 +1,4 @@
-from random import randint
+from random import shuffle
 class Card():
     valid_suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
     valid_values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
@@ -38,15 +38,9 @@ class Deck():
     
     def shuffle(self):
         if len(self.cards) != 52:
-            raise ValueError('Only full decks can be shuffled')
-        else:
-            for i in range(0, 1000):
-                a = randint(0,51)
-                b = randint(0,51)
-                aux = self.cards[a]
-                self.cards[a] = self.cards[b]
-                self.cards[b] = aux      
-        return self.cards
+            raise ValueError('Only full decks can be shuffled')     
+        shuffle(self.cards)
+        return self
     
     def deal_card(self):
         return self._deal(1)[0]
