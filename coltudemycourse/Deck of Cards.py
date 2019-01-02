@@ -28,9 +28,11 @@ class Deck():
     
     def _deal(self, num_cards):
         deal_cards = []
-        for num in range(0, num_cards):
-            if num_cards > len(self.cards):
-                raise ValueError('All cards have been dealt')
+        if len(self.cards) == 0:
+            raise ValueError('All cards have been dealt')
+        if num_cards > len(self.cards):
+            num_cards = len(self.cards)
+        for num in range(0, num_cards):           
             deal_cards.append(self.cards.pop())
         return deal_cards
     
@@ -39,22 +41,18 @@ class Deck():
             raise ValueError('Only full decks can be shuffled')
         else:
             for i in range(0, 1000):
-                a = randint(0,52)
-                b = randint(0,52)
+                a = randint(0,51)
+                b = randint(0,51)
                 aux = self.cards[a]
                 self.cards[a] = self.cards[b]
-                self.cards[b] = aux
+                self.cards[b] = aux      
         return self.cards
     
     def deal_card(self):
-        return self._deal(1)
+        return self._deal(1)[0]
     
-    def deal_hand(self, num_cards):
-        self.num_cards = num_cards
-        return self._deal(self.num_cards)
+    def deal_hand(self, ncards):
+        self.ncards = ncards
+        return self._deal(self.ncards)
 
-"""my_deck = Deck()
-card = my_deck.deal_card
-print(card)
-print(my_deck)"""
         
