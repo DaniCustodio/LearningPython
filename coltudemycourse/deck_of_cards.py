@@ -23,6 +23,14 @@ class Deck():
     def __repr__(self):
         return f'Deck of {len(self.cards)} cards'
     
+    def __iter__(self):
+        for card in self.cards:
+            yield card
+
+    def reset(self):
+        self.cards = [Card(s, v) for s in Card.valid_suits for v in Card.valid_values]
+        return self
+    
     def count(self):
         return len(self.cards)
     
